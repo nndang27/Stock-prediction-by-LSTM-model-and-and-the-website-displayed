@@ -1,0 +1,2219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Getting Started with Chart JS with www.chartjs3.com</title>
+<!--    <link rel="stylesheet" href="style.css">-->
+<style>
+      :root{
+    --primary-color: #07afd9;
+    }
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+          box-sizing: border-box;
+
+      }
+      .chartMenu {
+        width: 1000px;
+        height: 40px;
+        background: white;
+        color: rgba(54, 162, 235, 1);
+      }
+      .chartMenu p {
+        padding: 10px;
+        font-size: 20px;
+      }
+      .chartCard {
+        width: 100%;
+        height: 100%;
+        background: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .chartBox {
+        width: 1600px;
+        height: 650px;
+        padding: 45px;
+        border-radius: 5px;
+        border: solid 3px rgba(54, 162, 235, 1);
+        background: whitesmoke;
+      }
+      /*-------------------------------------Indicator--------------------------------------------*/
+    .indicator{
+        top:300px;
+       left:1140px;
+       width:25px;
+       height:10px;
+       position: absolute;
+       z-index: 2;
+
+}
+    .check{
+    top:1px;
+       left:30px;
+
+    position: relative;
+    height:  2.5rem;
+    width: 8.5rem;
+    margin: 0.5rem;
+
+}
+    .check input{
+    position: relative;
+    height: 2em;
+    width: 2em;
+}
+.check .label{
+    color: var(--primary-color);
+    font-size: 0.90rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: absolute;
+    left: 40px;
+    top: 25px;
+}
+.check select{
+    top: 28px;
+    position: relative;
+    height: 60%;
+    width: 6em;
+    left:150px
+}
+.check::after{
+        content: '\25BC';
+        position: absolute;
+        top: 28px;
+        left: 253px;
+    height: 1.5em;
+        padding: 0 0.2em;
+        background: #D3D3D3;
+        cursor: pointer;
+        pointer-events: none;
+        transition: 25s all ease;
+
+    }
+    .check2{
+    top:30px;
+       left:30px;
+
+    position: relative;
+    height:  2.5rem;
+    width: 10rem;
+    margin: 0.5rem;
+}
+    .check2 input{
+    position: relative;
+    height: 2em;
+    width: 2em;
+
+}
+.check2 .label{
+    color: var(--primary-color);
+    font-size: 0.90rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: absolute;
+    width:1000px;
+    left: 40px;
+    top: 0px;
+}
+/*.--------------------------------------Draw--------------------------------------------*/
+.container{
+    top:150px;
+       left:1px;
+       width:25px;
+       height:40px;
+       position: absolute;
+       z-index: 2;
+}
+.checkedbox-group{
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.text-div{
+    top:1px;
+       left:8px;
+
+    position: relative;
+    height:  2.5rem;
+    width: 2.5rem;
+    margin: 0.5rem;
+}
+.text-div input{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    margin: 0;
+    z-index: 2;
+    opacity: 0;
+}
+.text-div .text-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    transition: all 300ms ease;
+}
+.text-div ion-icon{
+    color: var(--primary-color);
+    font-size: 3rem;
+}
+.text-div label{
+    color: var(--primary-color);
+    font-size: 0.30rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+input:checked + .text-title{
+    background-color: var(--primary-color);
+    box-shadow: 0 0 12px var(--primary-color);
+}
+input:hover + .text-title{
+    box-shadow: 0 0 12px var(--primary-color);
+}
+input:checked + .text-title ion-icon,
+input:checked + .text-title label{
+    color: white
+}
+/*---------------------------------------------------------------------------------------*/
+
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        outline: 0;
+        box-shadow: none;
+        border: 0!important;
+        background: #07afd9 none;
+        flex: 1;
+        padding: 0 .8em;
+        color:#fff;
+        cursor: pointer;
+        font-size: 1.3em;
+}
+    select::-ms-expand{
+        display: none;
+    }
+    .selectStock{
+        top: 30px;
+         left:400px;
+        bottom:618px;
+        width: 6em;
+        height: 2em;
+        line-height: 3;
+        background: #07afd9;
+        overflow: hidden;
+        border-radius: .25em;
+        position: absolute;
+        font-family: Arial;
+
+    }
+    .selectStock::after{
+        content: '\25BC';
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 0.2em;
+        background: #D3D3D3;
+        cursor: pointer;
+        pointer-events: none;
+        transition: 25s all ease;
+
+    }
+    .select-selected:hover::after {
+        color: #23b499
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items .select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/*-----------------------------------------Volume---------------------------------------*/
+    .volume{
+    top:10px;
+       left:100px;
+        top: 40px;
+       width:110px;
+       height:40px;
+       position: absolute;
+       z-index: 2;
+}
+    .volume input{
+        transform: scale(1.5);
+}
+    .volume label{
+        color: var(--primary-color);
+        font-size: 0.90rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    /*-------------------------------------------------AI--------------------------------------------------------*/
+    .predictbutton{
+        top:10px;
+       left:700px;
+        top: 40px;
+       width:1100px;
+       height:40px;
+       position: absolute;
+       z-index: 2;
+}
+    .predictbutton input.bt1{
+        transform: scale(1.5);
+        width: 10em;
+}
+    .predictbutton input.bt2{
+        transform: scale(1.5);
+        position: absolute;
+        left: 180px;
+        top: 4px;
+}
+    .predictbutton label{
+        color: var(--primary-color);
+        font-size: 0.90rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: absolute;
+        left: 202px;
+    }
+    /*----------------------------------------------------Line-------------------------------------------------------*/
+.line {
+            border-bottom: 2px solid deepskyblue;
+            margin-top: 2px;
+            width: 24%;
+            position: absolute;
+            right: 9px;
+            top: 300px;
+
+        }
+.vertical {
+            border-left: 2px solid deepskyblue;
+            height: 90%;
+            position: absolute;
+            right: 395px;
+            top: 10px;
+        }
+/*----------------------------------------------DataWindow--------------------------------------------------------*/
+    .information{
+        position: absolute;
+        right: 0px;
+        top: 5px;
+        height: 290px;
+        width: 390px;
+    }
+    .datawindow{
+        position: absolute;
+        border:1px solid #CCC;
+        height: 30px;
+        width: 390px;
+        right: 3px;
+        background-color: #EBEBEB;
+        border-radius: 5px;
+    }
+    .datawindow h4{
+        position: absolute;
+        letter-spacing: 1px;
+        left: 10px;
+        top: 2px;
+    }
+    .date{
+        position: absolute;
+        height: 30px;
+        width: 380px;
+        top: 40px;
+        right: 7px;
+        /*background-color: #EBEBEB;*/
+    }
+    .stockwindow{
+        position: absolute;
+        border:1px solid #CCC;
+        height: 30px;
+        width: 390px;
+        right: 3px;
+        top: 70px;
+        background-color: #ADD8E6;
+        border-radius: 5px;
+    }
+    .stockwindow h4{
+        position: absolute;
+        letter-spacing: 1px;
+        left: 10px;
+        top: 2px;
+    }
+.open{
+        position: absolute;
+        height: 30px;
+        width: 380px;
+        top: 110px;
+        right: 7px;
+        /*background-color: #EBEBEB;*/
+    }
+.high{
+        position: absolute;
+        height: 30px;
+        width: 380px;
+        top: 150px;
+        right: 7px;
+        /*background-color: #EBEBEB;*/
+    }
+.low{
+        position: absolute;
+        height: 30px;
+        width: 380px;
+        top: 190px;
+        right: 7px;
+        /*background-color: #EBEBEB;*/
+    }
+.close{
+        position: absolute;
+        height: 30px;
+        width: 380px;
+        top: 230px;
+        right: 7px;
+        /*background-color: #EBEBEB;*/
+    }
+.volume2{
+        position: absolute;
+        height: 30px;
+        width: 380px;
+        top: 270px;
+        left: 3px;
+        /*background-color: #EBEBEB;*/
+    }
+
+
+.reset .check2 {
+  color: dodgerblue;
+    height: 40px;
+    width: 80px;
+
+    border-radius: 5px;
+}
+
+.reset .check2:hover {
+  background: #2196F3;
+  color: white;
+}
+.reset .check2 label{
+    color: var(--primary-color);
+        font-size: 0.90rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        position: absolute;
+    left:10px;
+    bottom: 10px;
+}
+</style>
+
+  </head>
+  <body>
+
+    <div class="chartCard">
+      <div class="chartBox">
+        <canvas id="myChart"></canvas>
+
+        <div class="selectBox2">
+
+        </div>
+        <div class="selectStock" >
+          <select id="selectStock" onchange="changeStockName(this)">
+            <option value="E:\GR1\dataset\excel_fpt.csv">FPT</option>
+            <option value="E:\GR1\dataset\excel_aaa.csv">AAA</option>
+            <option value="E:\GR1\dataset\excel_abs.csv">ABS</option>
+            <option value="E:\GR1\dataset\excel_acs.csv">ACS</option>
+            <option value="E:\GR1\dataset\excel_afx.csv">AFX</option>
+            <option value="E:\GR1\dataset\excel_bqb.csv">BQB</option>
+            <option value="E:\GR1\dataset\excel_chpg2105.csv">CHPG2105</option>
+            <option value="E:\GR1\dataset\excel_icn.csv">ICN</option>
+            <option value="E:\GR1\dataset\excel_vbg.csv">VBG</option>
+            <option value="E:\GR1\dataset\excel_abs.smc">SMC</option>
+          </select>
+        </div>
+
+
+
+      <div class="line"></div>
+        <div class= "vertical"></div>
+
+        <div class="volume">
+          <input onclick="update('volume')" type="checkbox" id="volume" >
+          <label for="volume">Volume</label>
+        </div>
+
+        <div class="information">
+          <div class="datawindow"><h4 id="text-data-window">Data Window</h4></div>
+          <div class="date"><p id="date1" style="margin:0;display:inline;float:left">Date</p>
+            <p id="date-info" style="margin:0;display:inline;float:right">Jan 01,2023, 12:00:00 a.m</p></div>
+          <div class="stockwindow"><h4 id="stock-data-window">FPT</h4></div>
+          <div class="open"><h4  style="margin:0;display:inline;float:left">Open</h4>
+            <p id="open-info" style="margin:0;display:inline;float:right">0</p></div>
+          <div class="high"><h4  style="margin:0;display:inline;float:left">High</h4>
+            <p id="high-info" style="margin:0;display:inline;float:right">0</p></div>
+          <div class="low"><h4 style="margin:0;display:inline;float:left">Low</h4>
+            <p id="low-info" style="margin:0;display:inline;float:right">0</p></div>
+          <div class="close"><h4 style="margin:0;display:inline;float:left">Close</h4>
+            <p id="close-info" style="margin:0;display:inline;float:right">0</p></div>
+          <div class="volume2" id="volume-div"><h4 style="margin:0;display:inline;float:left">Volume</h4>
+            <p id="volume-info" style="margin:0;display:inline;float:right">0</p></div>
+        </div>
+<!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+        <div class="indicator">
+            <div class="check">
+              <select id="selectMV" onchange="changeMV(this)" >
+                <option value="10">10 days</option>
+                <option value="20">20 days</option>
+                <option value="50">50 days</option>
+              </select>
+              <input onclick="update('ma')" type="checkbox" id="ma" >
+              <div class="label">
+                <label for="text">Moving Average</label>
+              </div>
+              </div>
+
+          <div class="check">
+              <select id="selectBB" onchange="changeBB(this)" >
+            <option value="10">10 days</option>
+            <option value="20">20 days</option>
+            <option value="50">50 days</option>
+          </select>
+          <input onclick="update('bb')" type="checkbox" id="bb" >
+              <div class="label">
+                <label for="text">Boilinger Band</label>
+              </div>
+              </div>
+
+          <div class="check2">
+              <input onclick="update('rsi')" type="checkbox" id="rsi">
+              <div class="label">
+                <label for="text">RSI(based on 14 periods)</label>
+              </div>
+              </div>
+
+          <div class="check2">
+              <input onclick="update('macd')" type="checkbox" id="macd">
+              <div class="label">
+                <label for="text">MACD and Signal indicators</label>
+              </div>
+              </div>
+          <div class="reset">
+            <button class="check2" onclick=reset()><label for="reset">Reset</label></button>
+          </div>
+
+
+        </div>
+<!--&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+        <div class="container">
+          <div class="checkedbox-group">
+
+            <div class="text-div">
+          <input onclick="trendline()" type="checkbox" id="tl" >
+          <div class="text-title">
+            <ion-icon name="trending-up-outline"></ion-icon>
+            <label for="text">Trend</label>
+          </div>
+          </div>
+
+            <div class="text-div">
+          <input onclick="fibretracement()" type="checkbox" id="fr" >
+          <div class="text-title">
+            <ion-icon name="menu-outline"></ion-icon>
+            <label for="text">Fib </label>
+          </div>
+          </div>
+
+            <div class="text-div">
+          <input onclick="brush()" type="checkbox" id="br"  >
+          <div class="text-title">
+            <ion-icon name="brush-outline"></ion-icon>
+            <label for="text">Brush</label>
+          </div>
+          </div>
+
+            <div class="text-div">
+          <input onclick="text()" type="checkbox" id="text" >
+          <div class="text-title">
+            <ion-icon name="text-outline"></ion-icon>
+            <label for="text">Text</label>
+          </div>
+          </div>
+
+        </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
+            integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.0/chartjs-plugin-zoom.min.js"
+            integrity="sha512-B6F98QATBNaDHSE7uANGo5h0mU6fhKCUD+SPAY7KZDxE8QgZw9rewDtNiu3mbbutYDWOKT3SPYD8qDBpG2QnEg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<!--Python script--------------------------------------------------------------------------------------------------------------->
+<!--    Button to show prediction----------------------------------------------------------------------------------------------->
+
+    <div class="predictbutton">
+      <input type="text" id="days" name="days"  placeholder="Enter number of days" class="bt1">
+      <input onclick="showpred()" type="checkbox" name="predict" id="predict" class="bt2">
+      <label for="predict">AI assistant</label>
+    </div>
+<!--    Javascript ------------------------------------------------------------------------------------------------------------->
+    <script>
+    document.getElementById('volume-div').style.display='none';
+    let minDate;
+        let maxDate;
+        let minY;
+        let maxY;
+        let date;
+    var number_of_days=0;
+        let url="E:/GR1/dataset/excel_fpt.csv";
+        let predicted_data = [];
+        let predicted_volume = [];
+    // setup
+
+    let data = {
+      // labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{
+        label: 'Candlestick Bar',
+        data: [
+          {
+            x: new Date('2022-06-01').setHours(0, 0, 0, 0),
+            o: 1.25,
+            h: 1.35,
+            l: 1.00,
+            c: 1.10,
+            s: [1.25, 1.10],
+            v: 20000
+          }
+        ],
+        backgroundColor: (ctx) => {
+          const {raw: {o, c, x}} = ctx;
+          let color;
+          let current_date = new Date(date);
+          if(x<=current_date) {
+            if (c >= o) {
+              color = 'rgb(240,255,255)';//'rgb(144,238,144)';
+            } else {
+              color = 'rgb(255,192,203)';
+            }
+          }
+          else{
+            if (c >= o) {
+              color = 'rgba(75,192,192,1)';//'rgb(144,238,144)';
+            } else {
+              color = 'rgba(255,26,104,1)';
+            }
+          }
+          return color;
+
+        },
+        borderColor: (ctx) => {
+          const {raw: {o, c, x}} = ctx;
+          let color;
+          let current_date = new Date(date);
+          if(x<=current_date){
+            if (c >= o) {
+            color = 'rgba(75,192,192,1)';
+          } else {
+            color = 'rgba(255,26,104,1)';
+          }
+          }
+          else{
+            color='rgba(255,159,64,1)';
+          }
+
+          return color;
+        },
+        //borderColor: 'rgba(0, 0, 0, 1)',
+        borderWidth: 2,
+        borderSkipped: false,
+        yAxisID: 'y',
+        //xAxisID: 'x'
+      },
+        {//RSI
+          type: 'line',
+          label: 'RSI Indicator',
+          // backgroundColor: 'black',
+          borderColor: 'black',
+          data: [
+            { x: new Date('2022-06-01').setHours(0, 0, 0, 0), s:20 }
+          ],
+          yAxisID: 'yLower',
+          hitRadius: 0,
+          //pointRadius: 0
+      },
+      {//histogram
+          type: 'bar',
+          label: 'Histogram',
+          backgroundColor: (ctx) => {
+          const {raw: {s}} = ctx;
+          let color;
+          if (s[0] < s[1]) {
+            color = 'rgba(75,192,192,1)';
+          } else {
+            color = 'rgba(255,26,104,1)';
+          }
+          return color;
+          },
+          // borderColor: 'black',
+          data: [
+            { x: new Date('2022-06-01').setHours(0, 0, 0, 0), s:[0,1]}
+          ],
+          yAxisID: 'yMACD',
+          hitRadius: 0,
+          //pointRadius: 0
+      },
+      {//MCAD
+          type: 'line',
+          label: 'MACD Indicator',
+          // backgroundColor: 'black',
+          borderColor: 'blue',
+          data: [
+            { x: new Date('2022-06-01').setHours(0, 0, 0, 0), s:20 }
+          ],
+          yAxisID: 'yMACD',
+          hitRadius: 0,
+          //pointRadius: 0
+      },
+      {//signal
+          type: 'line',
+          label: 'Signal indicator',
+          // backgroundColor: 'black',
+          borderColor: 'yellow',
+          data: [
+            { x: new Date('2022-06-01').setHours(0, 0, 0, 0), s:20 }
+          ],
+          yAxisID: 'yMACD',
+          hitRadius: 0,
+          //pointRadius: 0
+      },
+      {//volume
+          type: 'bar',
+          label: 'Volume',
+          backgroundColor: (ctx) => {
+          const {raw: {v, x}} = ctx;
+          let color;
+          let current_date = new Date(date);
+          if(x<=current_date) {
+            if (v[0] < v[1]) {
+              color = 'rgba(75,192,192,1)';
+            } else {
+              //color='rgba(255,159,64,1)'
+              color = 'rgba(255,26,104,1)';
+            }
+          }
+          else{
+            color='rgba(255,159,64,1)';
+          }
+          return color;
+          },
+          data: [
+            { x: new Date('2022-06-01').setHours(0, 0, 0, 0), v:[0,899700], s:[1.25, 1.10]}
+          ],
+          yAxisID: 'yVolume',
+          hitRadius: 0,
+          pointRadius: 0.6
+      },
+      ]
+    };
+
+    const candlestick = {
+      id: 'canlestick',
+      beforeDatasetsDraw(chart,args,pluginOptions){
+        const {ctx , data , chartArea: {top, bottom, left, right, height}, scales: {x,y}
+        } = chart;
+        //ctx.save();
+        ctx.lineWidth = 2;
+
+        data.datasets[0].data.forEach((datapoint, index) => {
+          let current_date = new Date(date);
+          if(data.datasets[0].data[index].x<=current_date) {
+            if (data.datasets[0].data[index].c >= data.datasets[0].data[index].o) {
+              ctx.strokeStyle = 'rgba(75,192,192,1)';
+            }
+            //255,26,104,1
+            else {
+              ctx.strokeStyle = 'rgba(255,26,104,1)';
+            }
+          }
+          else{
+            ctx.strokeStyle='rgba(255,159,64,1)';
+          }
+          ctx.beginPath();
+          ctx.moveTo(chart.getDatasetMeta(0).data[index].x, chart.getDatasetMeta(0).data[index].y);
+          ctx.lineTo(chart.getDatasetMeta(0).data[index].x, y.getPixelForValue(data.datasets[0].data[index].h));
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.moveTo(chart.getDatasetMeta(0).data[index].x, chart.getDatasetMeta(0).data[index].y);
+          ctx.lineTo(chart.getDatasetMeta(0).data[index].x, y.getPixelForValue(data.datasets[0].data[index].l));
+          ctx.stroke();
+          ctx.closePath()
+          //ctx.restore()
+        })
+      }
+    }
+    //Moving Average indicator
+    let n_days_MV = "10";
+    const movingAverage = {
+      id: 'movingAverage',
+      afterDatasetsDraw(chart,args, pluginOptions) {
+        const {ctx, data, scales: {x, y}} = chart;
+        ctx.save();
+        const ma = document.getElementById('ma');
+        const closingPrice = data.datasets[0].data.map(datapoint => {
+            return datapoint.c;
+          });
+        const movingAverage = [];
+
+        if (ma.checked === true) {
+          const redundant = (parseInt(number_of_days)+1)*parseInt(number_of_days)/2;
+          console.log("len=",data.datasets[0].data.length-redundant)
+          for (let i = 0; i < data.datasets[0].data.length-redundant; i++) {
+            let total = 0;
+            for(let j = i-parseInt(n_days_MV);j<i;j++){
+              total+= parseFloat(closingPrice[j]);
+            }
+            movingAverage.push(total/parseInt(n_days_MV));
+          }
+          //Draw Moving Average
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(102,102,102,1)';
+          ctx.lineWidth = 2;
+          ctx.moveTo(chart.getDatasetMeta(0).data[0].x, y.getPixelForValue(movingAverage[0]));
+          for( let i=1; i < data.datasets[0].data.length-redundant;i++){
+            ctx.lineTo(chart.getDatasetMeta(0).data[i].x, y.getPixelForValue(movingAverage[i]));
+          }
+          ctx.stroke();
+          ctx.closePath();
+          ctx.restore();
+        }
+      }
+    }
+
+    //customScale plugin block
+    const customScale = {
+      id: 'customScale',
+      beforeDatasetsDraw(chart, args, pluginOptions) {
+        const{ctx,data,chartArea:{top,bottom,left,right,width,height}, scales:{x,y
+        }} = chart;
+
+        ctx.save();
+        const dataOptions = {
+          day: 'numeric',
+          month: 'short'
+        };
+        data.datasets[0].data.forEach((datapoint, index)=>{
+          ctx.textAlign = 'center';
+        ctx.font='bold 12px sans-serif';
+        ctx.fillStyle='rgba(255,159,64,1)';
+        //ctx.fillText(new Date(datapoint.x).toLocaleString('en',dataOptions),x.getPixelForValue(datapoint.x),bottom +10);
+        })
+      }
+    }
+    //crosshair plugin block
+        let isValidate = true;
+    const crosshair={
+      id:'crosshair',
+      afterDatasetsDraw(chart,args,pluginOptions){
+        const{ctx,data,tooltip,chartArea:{top,bottom,left,right,width,height},scales:{x,y}} = chart;
+        if(chart.tooltip._active && chart.tooltip._active.length){
+          if(isValidate===true){
+            const activePoint = tooltip._active[0];
+          ctx.setLineDash([3,3]);
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = 'rgba(102,102,102,1)';
+          lines(activePoint.element.x,top,activePoint.element.x,bottom);
+          lines(left,y.getPixelForValue(tooltip.dataPoints[0].raw.c),right,y.getPixelForValue(tooltip.dataPoints[0].raw.c));
+          function lines(startX, startY,endX ,endY){
+            ctx.beginPath();
+            ctx.moveTo(startX,startY);
+            ctx.lineTo(endX,endY);
+            ctx.stroke();
+            ctx.closePath();
+          }
+          ctx.setLineDash([]);
+          //crosshairLabel left
+          ctx.beginPath();
+          ctx.fillRect(0,y.getPixelForValue(tooltip.dataPoints[0].raw.c)-12,left,24)
+          //crosshairlabel bottom
+          ctx.beginPath();
+          const textWidth = ctx.measureText(tooltip.dataPoints[0].label).width;
+          ctx.fillRect(x.getPixelForValue(tooltip.dataPoints[0].raw.x)-(textWidth/2),top+height,textWidth,24);
+
+          ctx.fillStyle = 'white';
+          ctx.font = 'bold 12px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseLine = 'middle';
+          ctx.fillText(tooltip.dataPoints[0].raw.c,left/2,y.getPixelForValue(tooltip.dataPoints[0].raw.c));
+          ctx.fillText(tooltip.dataPoints[0].label, x.getPixelForValue(tooltip.dataPoints[0].raw.x), top+height+12);
+          chart.canvas.style.cursor = 'crosshair';
+          document.getElementById("date-info").innerHTML = tooltip.dataPoints[0].label;
+          document.getElementById("open-info").innerHTML = tooltip.dataPoints[0].raw.o;
+          document.getElementById("high-info").innerHTML = tooltip.dataPoints[0].raw.h;
+          document.getElementById("low-info").innerHTML = tooltip.dataPoints[0].raw.l;
+          document.getElementById("close-info").innerHTML = tooltip.dataPoints[0].raw.c;
+          document.getElementById("volume-info").innerHTML = tooltip.dataPoints[0].raw.v;
+
+          }
+          }
+        else{
+          if(isValidate===true) {
+            myChart.canvas.onmousemove = (e) => {
+              chart.update('none');
+              ctx.setLineDash([3, 3]);
+              ctx.lineWidth = 2;
+              ctx.strokeStyle = 'rgba(102,102,102,1)';
+              lines(e.offsetX, top, e.offsetX, bottom);
+              lines(left, e.offsetY, right, e.offsetY);
+
+              function lines(startX, startY, endX, endY) {
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                ctx.lineTo(endX, endY);
+                ctx.stroke();
+                ctx.closePath();
+              }
+
+              ctx.setLineDash([]);
+              //crosshairLabel left
+              ctx.beginPath();
+              ctx.fillRect(0, e.offsetY - 12, left, 24)
+              //crosshairlabel bottom
+              ctx.beginPath();
+              // Convert timestamp to milliseconds
+              const months_arr = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+              const date = new Date(x.getValueForPixel(e.offsetX));
+              const year = date.getFullYear();
+              const month = months_arr[date.getMonth()];
+              const day = date.getDate();
+              const fulldate = month + " " + day + "," + year + ", 12:00:00 a.m.";
+              const textWidth = ctx.measureText(fulldate).width;
+              ctx.fillRect(e.offsetX - (textWidth / 2), top + height, textWidth, 24);
+              ctx.fillStyle = 'white';
+              ctx.font = 'bold 12px sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseLine = 'middle';
+              ctx.fillText(y.getValueForPixel(e.offsetY).toFixed(2), left / 2, e.offsetY);
+              ctx.fillText(fulldate, e.offsetX, top + height + 12);
+              ctx.closePath();
+              ctx.restore();
+              document.getElementById("stockwindow").innerHTML = ;
+              document.getElementById("date-info").innerHTML = fulldate;
+              document.getElementById("open-info").innerHTML = 0;
+              document.getElementById("high-info").innerHTML = 0;
+              document.getElementById("low-info").innerHTML = 0;
+              document.getElementById("close-info").innerHTML = 0;
+              document.getElementById("volume-info").innerHTML = 0;
+            }
+            chart.canvas.style.cursor = 'crosshair';
+
+          }
+        }
+        redrawStoredLines(chart);
+        redrawStoredRectangles(chart);
+        redrawStoredBrush(chart);
+        redrawStoredText(chart);
+        }
+      }
+    //indicators plugin block
+        let n_days_BB = "10";
+    const BBindicators = {
+      id:'BBindicators',
+      afterDatasetsDraw(chart,args,pluginOptions){
+        const {ctx,chartArea: {top, bottom, left, right}, data,scales:{x,y} } = chart;
+        ctx.save();
+        const bb=document.getElementById('bb');
+        const movingAverage = [];
+        const currentPrice = [];
+        const standardD = [];
+        const closingPrice = data.datasets[0].data.map(datapoint => {
+            return datapoint.c;
+          });
+
+        if(bb.checked === true) {
+          const redundant = (parseInt(number_of_days)+1)*parseInt(number_of_days)/2;
+          for (let i = 0; i < data.datasets[0].data.length-redundant; i++) {
+            let total = 0;
+            for(let j = i-parseInt(n_days_BB)+1;j<=i;j++){
+              total+= parseFloat(closingPrice[j]);
+            }
+
+            currentPrice.push(parseFloat(closingPrice[i]));
+            movingAverage.push(total/parseInt(n_days_BB));
+          }
+          //Variance
+
+          for(let i = 0;i<data.datasets[0].data.length-redundant;i++) {
+            let total_ = 0;
+            for (let j = i-parseInt(n_days_BB); j < i; j++) {
+              if (isNaN(Math.pow((currentPrice[j] - movingAverage[i]), 2))) {
+                total_ += 0;
+              } else {
+                total_ += Math.pow((currentPrice[j] - movingAverage[i]), 2);
+              }
+            }
+            standardD.push(Math.sqrt( total_/parseInt(n_days_BB) ));
+          }
+          let upper_band = [];
+          let lower_band = [];
+          for(let i=0;i<data.datasets[0].data.length-redundant;i++){
+            let n = 0;
+            if(parseInt(n_days_BB) === 10){
+              n = 1.5;
+            }
+            if(parseInt(n_days_BB) === 20){
+              n = 2;
+            }
+            if(parseInt(n_days_BB) === 50){
+              n = 2.5;
+            }
+            upper_band.push(movingAverage[i]+n*standardD[i]);
+            lower_band.push(movingAverage[i]-n*standardD[i]);
+          }
+          //Moving Average
+         ctx.beginPath();
+         ctx.strokeStyle = 'rgba(255,159,64,1)';
+         ctx.fillStyle='rgba(255,159,64,0.2)';
+         ctx.lineWidth = 2;
+         ctx.moveTo(chart.getDatasetMeta(0).data[0].x, y.getPixelForValue(lower_band[0]));
+         for( let i=1; i < data.datasets[0].data.length-redundant;i++){
+           ctx.lineTo(chart.getDatasetMeta(0).data[i].x, y.getPixelForValue(lower_band[i]));
+         }
+         for(let j=data.datasets[0].data.length-1-redundant;0<=j;j--){
+           ctx.lineTo(chart.getDatasetMeta(0).data[j].x, y.getPixelForValue(upper_band[j]) );
+         }
+         ctx.stroke();
+         ctx.closePath();
+         ctx.fill();
+         ctx.restore();
+        }
+        }
+    }
+    const RSIindicator = {
+        id:'RSIindicator',
+        afterDatasetsDraw(chart,args,pluginOptions) {
+          const {ctx, data, tooltip, chartArea: {top, bottom, left, right, width, height}, scales: {x, y,yLower}} = chart;
+          //RSI indicator
+          ctx.beginPath();
+          ctx.lineWidth = 1;
+          ctx.strokeStyle = 'rgba(75,192,192,1)';
+          ctx.moveTo(left, yLower.getPixelForValue(70));
+          ctx.lineTo(right, yLower.getPixelForValue(70));
+          ctx.stroke();
+          ctx.closePath();
+          ctx.restore();
+          ctx.beginPath();
+          ctx.lineWidth = 1;
+          //255,26,104,1
+          ctx.strokeStyle = 'rgba(255,26,104,1)';
+          ctx.moveTo(left, yLower.getPixelForValue(30));
+          ctx.lineTo(right, yLower.getPixelForValue(30));
+          ctx.stroke();
+          ctx.closePath();
+          ctx.restore();
+         }
+    }
+    const decimation = {
+        enabled: true,
+        algorithm: 'min-max',
+        //samples: 50,
+    };
+    // config
+
+
+    let config = {
+      type: 'bar',
+      data,
+      options: {
+        layout: {
+          padding: {
+            bottom: 20,
+            left: 10
+          }
+        },
+        parsing: {
+          xAxisKey: 'x',
+          yAxisKey: 's',
+          yLowerAxisKey: 's',
+          //yVolumeAxisKey: 's'
+        },
+          animation: true,
+        scales: {
+          x: {
+              stacked: true,
+              position: 'bottom',
+               offset: false,
+               type: 'time',
+              time: {
+                unit: 'day',
+                displayFormats: {
+                hour: 'HH:mm',
+                minute: 'HH:mm',
+                  second: 'HH:mm:ss'
+                }
+              },
+              min: (ctx) =>{
+                return minDate;
+              },
+              max: (ctx) =>{
+                return maxDate;
+              },
+
+              grid: {
+                display: true,
+
+              },
+              ticks: {
+                display: true,
+                  autoSkip: true,
+                  autoSkipPadding: 50,
+                  maxRotation: 0
+                }
+              },
+          yMACD: {
+            beginAtZero: false,
+            type: 'linear',
+            stack: 'yScale',
+            stackWeight: 0,
+            suggestedMax: 2,
+            ticks: {
+              count: 3,
+              display: false,
+              color: 'green',
+              beginAtZero : false
+            }
+          },
+            yLower: {
+            beginAtZero: false,
+            min: 0,
+            max: 100,
+            type: 'linear',
+            stack: 'yScale',
+            suggestedMin: 0,
+            suggestedMax: 100,
+            stackWeight: 0,
+            ticks: {
+              //count: 3,
+              stepSize: 10,
+              display: false,
+              color: 'red',
+              callback: ((value,index,values) =>{
+                if(index ===3 || index === 7 || index === 10){ return value.toFixed(0);
+                }
+              })
+            }
+          },
+
+          yVolume: {
+            beginAtZero: false,
+            min: 0,
+            max:2000000,
+            type: 'linear',
+            stack: 'yScale',
+            stackWeight: 0,
+            suggestedMin: 0,
+            suggestedMax: 2000000,
+            ticks: {
+              //count: 3,
+              display: false,
+              color: 'blue',
+              beginAtZero : false,
+              callback: ((value,index,values) =>{
+                //console.log(index," ",value)
+                if(index ===1 || index === 2 ){ return value.toFixed(0);
+                }
+              })
+            }
+          },
+
+          y: {
+            beginAtZero: false,
+             // suggestedMin: 0,
+             // suggestedMax: 100,
+            grace: 1,
+            stack: 'yScale',
+            stackWeight: 4,
+            ticks: {
+              callback: ((value,index,values) =>{
+                if(parseFloat(values[0].value) > parseFloat(values[1].value)) {
+                  if (index !== 0 && index!==1 && index !== values.length - 1) {return value;}
+                }
+                else{
+                  if(index !== 0&& index!== values.length-1){ return value;}
+                }
+              })
+
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+
+          },
+            //decimation: decimation,
+          tooltip:{
+            callbacks: {
+              afterBody: (ctx)=>{
+                let bodyArray = [];
+                if(ctx[0].dataset.label==='Candlestick Bar'){
+                  bodyArray = [
+                  `O: ${ctx[0].raw.o}`,
+                  `H: ${ctx[0].raw.h}`,
+                  `L: ${ctx[0].raw.l}`,
+                  `C: ${ctx[0].raw.c}`,
+                    ];
+                }
+                if(ctx[0].dataset.label==='RSI Indicator'){
+                  bodyArray = [
+                         `RSI: ${ctx[0].raw.s.toFixed(2)}`
+                  ]
+                }
+                if(ctx[0].dataset.label==='MACD Indicator'){
+                  bodyArray = [
+                         `MACD: ${ctx[0].raw.s.toFixed(2)}`
+                  ]
+                }
+                if(ctx[0].dataset.label==='Signal indicator'){
+                  bodyArray = [
+                         `Signal: ${ctx[0].raw.s.toFixed(2)}`
+                  ]
+                }
+                if(ctx[0].dataset.label==='Histogram'){
+                  bodyArray = [
+                         `MACD - Signal: ${ctx[0].raw.s[1].toFixed(2)}`
+                  ]
+                }
+                if(ctx[0].dataset.label==='Volume'){
+                  bodyArray = [
+                         `Volume: ${ctx[0].raw.s[1]}`
+                  ]
+                }
+
+                return bodyArray;
+              },
+              label: (ctx) =>{
+                return '';
+              }
+            }
+          },
+          zoom:{
+            pan: {
+              enabled: true,
+              mode: 'xy',
+              modifierKey: 'ctrl',
+              //threshold: 10
+            },
+            limits: {
+              //y:{min: 'original',max: 'original'},
+              yLower: {min: 'original',max: 'original'},
+              yVolume: {min: 'original',max: 'original'},
+              yMACD: {min: 'original',max: 'original'}
+            },
+            zoom:{
+              pinch: {
+                enabled: true,
+              },
+              wheel: {
+                enabled: true
+              },
+              mode: 'xy'
+            }
+          }
+        }
+      },
+      plugins: [candlestick,crosshair,customScale, BBindicators, movingAverage, RSIindicator,decimation]
+    };
+    // render init block;
+    let isAcceptTL = false;
+    let isAcceptFR = false;
+    let isAcceptBR = false;
+    let isAcceptText = false;
+    let stored_x = 0;
+    let stored_x2= 0;
+    let stored_y = 0;
+    let stored_y2=0;
+
+    var myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+
+    let storedLines = [];
+    let storedRectangles = [];
+    let storedBrush = [];
+    let storedText = [];
+    myChart.canvas.addEventListener('mousedown',(e)=>{
+            dragStart(myChart, e);
+    });
+    window.addEventListener('mouseup',(e)=>{
+            myChart.canvas.onmousemove = null;
+            isValidate = true;
+    });
+
+    function redrawStoredLines(chart) {
+    const {ctx, data, chartArea:{top,bottom,left,right,width,height}, scales:{x,y}} = chart;
+    if (storedLines.length === 0) {
+        return;
+    }
+    // redraw each stored line
+    for (let i = 0; i < storedLines.length; i++) {
+        ctx.strokeStyle = 'rgba(255,159,64,1)';
+        //headpoint
+        ctx.beginPath();
+        ctx.arc(x.getPixelForValue(storedLines[i].x1), y.getPixelForValue(storedLines[i].y1), 4, 0, 2 * Math.PI, true);
+        ctx.stroke();
+        //line
+        ctx.beginPath();
+        ctx.moveTo(x.getPixelForValue(storedLines[i].x1), y.getPixelForValue(storedLines[i].y1));
+        ctx.lineTo(x.getPixelForValue(storedLines[i].x2), y.getPixelForValue(storedLines[i].y2));
+        ctx.stroke();
+        //tail point
+        ctx.beginPath();
+        ctx.arc(x.getPixelForValue(storedLines[i].x2), y.getPixelForValue(storedLines[i].y2), 4, 0, 2 * Math.PI, true);
+        ctx.stroke();
+    }
+}
+    let textWidth = 0,a=0;
+    function redrawStoredRectangles(chart){
+      const {ctx, data, chartArea:{top,bottom,left,right,width,height}, scales:{x,y}} = chart;
+      if (storedRectangles.length === 0) {
+        return;
+      }
+      // redraw each stored line
+      for (let i = 0; i < storedRectangles.length; i++) {
+            ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+            //headpoint
+            ctx.beginPath();
+            ctx.arc(x.getPixelForValue(storedRectangles[i].x1), y.getPixelForValue(storedRectangles[i].y1), 4, 0, 2 * Math.PI, true);
+            ctx.stroke();
+            //line
+            ctx.beginPath();
+            ctx.setLineDash([3, 3]);
+            ctx.moveTo(x.getPixelForValue(storedRectangles[i].x1), y.getPixelForValue(storedRectangles[i].y1));
+            ctx.lineTo(x.getPixelForValue(storedRectangles[i].x2), y.getPixelForValue(storedRectangles[i].y2));
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+            //tail point
+            ctx.beginPath();
+            ctx.arc(x.getPixelForValue(storedRectangles[i].x2), y.getPixelForValue(storedRectangles[i].y2), 4, 0, 2 * Math.PI, true);
+            ctx.stroke();
+              let diff = y.getPixelForValue(storedRectangles[i].y2) - y.getPixelForValue(storedRectangles[i].y1);
+              let y1 = diff - Math.abs(diff)*0.236;
+              let y2 = diff - Math.abs(diff)*0.382;
+              let y3 = diff - Math.abs(diff)*0.5;
+              let y4 = diff - Math.abs(diff)*0.618;
+              let y5 = diff - Math.abs(diff)*0.764;
+              let y6 = diff - Math.abs(diff);
+              let y7 = Math.abs(diff)*1.382 - diff;
+              let y8 = Math.abs(diff)*1.618 - diff;
+              ctx.fillStyle='#FFFF33';    // color of fill
+              let x_start = x.getPixelForValue(storedRectangles[i].x1);
+              let x_end = x.getPixelForValue(storedRectangles[i].x2);
+              let y_start = y.getPixelForValue(storedRectangles[i].y1);
+              ctx.font = 'bold 12px sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseLine = 'middle';
+              ctx.beginPath();
+              ctx.fillStyle='rgba(255,99,71,0.3)';
+              ctx.fillRect(x_start, y_start-y7 , Math.abs(x_start - x_end), y7-y8);
+              textWidth = ctx.measureText("1.618("+String(y.getValueForPixel(y_start-y8).toFixed(2))+")").width;
+              a= (x_start - x_end)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("1.618("+String(y.getValueForPixel(y_start-y8).toFixed(2))+")", x_start+a, y_start-y8, textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(147,112,219,0.3)';    // color of fill
+              ctx.fillRect(x_start, y_start+y6 , Math.abs(x_start - x_end), -y6-y7);
+              textWidth = ctx.measureText("1.318("+String(y.getValueForPixel(y_start-y7).toFixed(2))+")").width;
+              a= (x_start - x_end)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("1.318("+String(y.getValueForPixel(y_start-y7).toFixed(2))+")", x_start+a, y_start-y7, textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(0,100,0,0.3)';    // color of fill
+              ctx.fillRect(x_start, y_start , Math.abs(x_start - x_end), y6);
+              textWidth = ctx.measureText("1("+String(y.getValueForPixel(y_start-y6).toFixed(2))+")").width;
+              a= (x_start - x_end)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("1("+String(y.getValueForPixel(y_start-y6).toFixed(2))+")", x_start+a, y_start-y6, textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(169,169,169,0.3)';    // color of fill
+              ctx.fillRect(x_start, y_start+y6 , Math.abs(x_start - x_end), y5-y6);
+              textWidth = ctx.measureText("0.786("+String(y.getValueForPixel(y_start+y5).toFixed(2))+")").width;
+              a= (x_start - x_end)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0.786("+String(y.getValueForPixel(y_start+y5).toFixed(2))+")",x_start+a,y_start+y5,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(135,206,250,0.3)';    // color of fill
+              ctx.fillRect(x_start, y_start+y5 , Math.abs(x_start - x_end), y4-y5);
+              textWidth = ctx.measureText("0.618("+String(y.getValueForPixel(y_start+y4).toFixed(2))+")").width;
+              a= (x_start - x_end)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0.618("+String(y.getValueForPixel(y_start+y4).toFixed(2))+")",x_start+a,y_start+y4,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(102,205,170,0.3)';    // color of fill
+              ctx.fillRect(x_start, y_start+y4 , Math.abs(x_start - x_end), y3-y4);
+              textWidth = ctx.measureText("0.5("+String(y.getValueForPixel(y_start+y3).toFixed(2))+")").width;
+              a= (x_start - x_end)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0.5("+String(y.getValueForPixel(y_start+y3).toFixed(2))+")",x_start+a,y_start+y3,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(0,250,154,0.3)';    // color of fill
+              ctx.fillRect(x_start, y_start+y3 , Math.abs(x_start - x_end), y2-y3);
+              textWidth = ctx.measureText("0.382("+String(y.getValueForPixel(y_start+y2).toFixed(2))+")").width;
+              a= (x_start - x_end)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0.382("+String(y.getValueForPixel(y_start+y2).toFixed(2))+")",x_start+a,y_start+y2,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(255,228,181,0.3)';    // color of fill
+              ctx.fillRect(x_start, y_start+y2 , Math.abs(x_start - x_end), y1-y2);
+              textWidth = ctx.measureText("0.236("+String(y.getValueForPixel(y_start+y1).toFixed(2))+")").width;
+              a= (x_start - x_end)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0.236("+String(y.getValueForPixel(y_start+y1).toFixed(2))+")",x_start+a,y_start+y1,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(250,128,114,0.3)';    // color of fill
+              ctx.fillRect(x_start, y_start+y1 , Math.abs(x_start - x_end), diff-y1);
+              textWidth = ctx.measureText("0("+String(y.getValueForPixel(y.getPixelForValue(storedRectangles[i].y2)).toFixed(2))+")").width;
+              a= (x_start - x_end)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0("+String(y.getValueForPixel(y.getPixelForValue(storedRectangles[i].y2)).toFixed(2))+")",x_start+a,y.getPixelForValue(storedRectangles[i].y2),textWidth);
+      }
+      ctx.closePath()
+      ctx.restore()
+    }
+    function redrawStoredBrush(chart){
+      const {ctx, data, chartArea:{top,bottom,left,right,width,height}, scales:{x,y}} = chart;
+      if (storedBrush.length === 0) {
+        return;
+      }
+      for(let i=0;i<storedBrush.length;i++){
+        //ctx.save();
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        ctx.moveTo(x.getPixelForValue(storedBrush[i].x1), y.getPixelForValue(storedBrush[i].y1));
+        for(let j=0;j<storedBrush[i].storedALine.length;j++){
+          ctx.lineTo(x.getPixelForValue(storedBrush[i].storedALine[j].x2), y.getPixelForValue(storedBrush[i].storedALine[j].y2));
+          ctx.stroke();
+        }
+        ctx.closePath();
+        ctx.restore()
+      }
+    }
+    function redrawStoredText(chart){
+      const {ctx, data, chartArea:{top,bottom,left,right,width,height}, scales:{x,y}} = chart;
+      if (storedText.length === 0) {
+        return;
+      }
+      for(let i=0;i<storedText.length;i++){
+        ctx.textBaseline = 'top';
+        ctx.textAlign = 'left';
+        ctx.font = "16px Arial";
+        ctx.fillStyle = 'rgba(0,0,0,1)';
+        ctx.fillText(storedText[i].text, x.getPixelForValue(storedText[i].x1) - 200, y.getPixelForValue(storedText[i].y1) );
+      }
+    }
+    let storedALine = [],hasInput=false;
+    function dragStart(chart,drag){
+      isValidate = false;
+      if(isAcceptText===true){
+        const {ctx, data, chartArea: {top, bottom, left, right, width, height}, scales: {x, y}} = chart;
+        if (drag.offsetX >= left && drag.offsetX <= right) {
+          myChart.canvas.onclick = (e) =>{
+            if(isAcceptText===true){
+              ctx.font = "16px Arial";
+              if (hasInput) return;
+              ctx.strokeStyle = 'rgba(0,0,0,1)';
+              ctx.beginPath();
+              ctx.arc(drag.offsetX, drag.offsetY, 4, 0, 2 * Math.PI, true);
+              ctx.stroke();
+              ctx.closePath();
+              addInput(e.offsetX, e.offsetY);
+              isValidate = true;
+            }
+
+          }
+          function addInput(x, y) {
+            let input = document.createElement('input');
+            input.type = 'text';
+            input.style.position = 'fixed';
+            input.style.left = (x+200) + 'px';
+            input.style.top = (y-10) + 'px';
+            input.onkeydown = handleEnter;
+            document.body.appendChild(input);
+            input.focus();
+            hasInput = true;
+          }
+          function handleEnter(e) {
+            let keyCode = e.keyCode;
+              if (keyCode === 13) {
+                drawText(this.value, parseInt(this.style.left, 10), parseInt(this.style.top, 10));
+                document.body.removeChild(this);
+                hasInput = false;
+                }
+          }
+
+          //Draw the text onto canvas:
+          function drawText(txt, x_, y_) {
+            ctx.textBaseline = 'top';
+            ctx.textAlign = 'left';
+            ctx.font = "16px Arial";
+            ctx.fillStyle = 'rgba(0,0,0,1)';
+            ctx.fillText(txt, x_ - 200, y_ );
+            storedText.push({
+              text: txt,
+              x1: x.getValueForPixel(x_),
+              y1: y.getValueForPixel(y_)
+            });
+          }
+
+          window.onmouseup = (e) => {isValidate = true;}
+        }
+      }
+      if(isAcceptBR===true){
+        const {ctx, data, chartArea: {top, bottom, left, right, width, height}, scales: {x, y}} = chart;
+        if (drag.offsetX >= left && drag.offsetX <= right) {
+            myChart.canvas.onmousemove = (e) => { dragMove3(e); }
+            function dragMove3(drag3) {
+                //chart.update('none');
+                redrawStoredBrush(chart);
+                ctx.beginPath();
+                ctx.lineWidth = 2;
+                ctx.lineJoin = "round";
+                ctx.lineCap = "round";
+                ctx.strokeStyle = 'rgba(0,0,0,1)';
+                ctx.moveTo(drag3.offsetX, drag3.offsetY);
+                ctx.lineTo(drag3.offsetX, drag3.offsetY);
+                ctx.stroke();
+
+                storedALine.push({
+                  x2: x.getValueForPixel(drag3.offsetX),
+                  y2: y.getValueForPixel(drag3.offsetY)
+                });
+
+                myChart.canvas.onmouseup = (e) => {
+                  ctx.closePath();
+                  ctx.restore();
+                  if(isAcceptBR===true) {
+                    storedBrush.push({
+                      x1: x.getValueForPixel(drag.offsetX),
+                      y1: y.getValueForPixel(drag.offsetY),
+                      storedALine: storedALine
+                    })
+                    storedALine = [];
+                  }
+                  redrawStoredBrush(chart);
+                  isValidate = true;
+                }
+                window.onmouseup = (e) => { isValidate = true;}
+            }
+        }
+      }
+      if(isAcceptTL === true) {
+        const {ctx, data, chartArea: {top, bottom, left, right, width, height}, scales: {x, y}} = chart;
+        if (drag.offsetX >= left && drag.offsetX <= right) {
+          ctx.beginPath();
+          ctx.arc(drag.offsetX, drag.offsetY, 4, 0, 2 * Math.PI, true);
+          ctx.stroke();
+          myChart.canvas.onmousemove = (e) => { dragMove(e); }
+
+          function dragMove(dragDelta) {
+            chart.update('none');
+            redrawStoredLines(chart);
+            //ctx.save();
+            ctx.strokeStyle = 'rgba(255,159,64,1)';
+            ctx.beginPath();
+            ctx.arc(drag.offsetX, drag.offsetY, 4, 0, 2 * Math.PI, true);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.lineWidth = 3;
+            ctx.moveTo(drag.offsetX, drag.offsetY);
+            ctx.lineTo(dragDelta.offsetX, dragDelta.offsetY);
+            ctx.stroke();
+
+            myChart.canvas.onmouseup = (e) => {
+              ctx.beginPath();
+              ctx.arc(dragDelta.offsetX, dragDelta.offsetY, 4, 0, 2 * Math.PI, true);
+              ctx.stroke();
+              ctx.closePath();
+              ctx.restore();
+              if(isAcceptTL===true) {
+                storedLines.push({
+                  x1: x.getValueForPixel(drag.offsetX),
+                  y1: y.getValueForPixel(drag.offsetY),
+                  x2: x.getValueForPixel(dragDelta.offsetX),
+                  y2: y.getValueForPixel(dragDelta.offsetY)
+
+                });
+              }
+              redrawStoredLines(chart);
+              isValidate = true;
+            }
+            window.onmouseup = (e) => { isValidate = true;}
+
+          }
+
+        }
+      }
+
+      if(isAcceptFR === true){
+        const {ctx, data, chartArea: {top, bottom, left, right, width, height}, scales: {x, y}} = chart;
+
+        if (drag.offsetX >= left && drag.offsetX <= right) {
+          ctx.beginPath();
+          ctx.arc(drag.offsetX, drag.offsetY, 4, 0, 2 * Math.PI, true);
+          ctx.stroke();
+          myChart.canvas.onmousemove = (e) => {dragMove2(e);}
+          function dragMove2(drag2){
+              chart.update('none');
+              redrawStoredRectangles(chart)
+              //ctx.save();
+              ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+              ctx.beginPath();
+              ctx.arc(drag.offsetX, drag.offsetY, 4, 0, 2 * Math.PI, true);
+              ctx.stroke();
+              ctx.beginPath();
+              ctx.setLineDash([3, 3]);
+              ctx.lineWidth = 3;
+              ctx.moveTo(drag.offsetX, drag.offsetY);
+              ctx.lineTo(drag2.offsetX, drag2.offsetY);
+              ctx.stroke();
+              ctx.closePath();
+              ctx.restore();
+              let diff = drag2.offsetY - drag.offsetY;
+              let y1 = diff - diff*0.236;
+              let y2 = diff - diff*0.382;
+              let y3 = diff - diff*0.5;
+              let y4 = diff - diff*0.618;
+              let y5 = diff - diff*0.764;
+              let y6 = diff - diff;
+              let y7 = diff*1.382 - diff;
+              let y8 = diff*1.618 - diff;
+              ctx.font = 'bold 12px sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseLine = 'middle';
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(255,99,71,0.3)';    // color of fill
+              ctx.fillRect(drag.offsetX,drag.offsetY-y7 , -drag.offsetX + drag2.offsetX, y7-y8);
+              textWidth = ctx.measureText("1.618("+String(y.getValueForPixel(drag.offsetY-y8).toFixed(2))+")").width;
+              a= (drag.offsetX - drag2.offsetX)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("1.618("+String(y.getValueForPixel(drag.offsetY-y8).toFixed(2))+")",drag.offsetX+a,drag.offsetY-y8,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(147,112,219,0.3)';    // color of fill
+              ctx.fillRect(drag.offsetX,drag.offsetY+y6 , -drag.offsetX + drag2.offsetX, -y6-y7);
+              textWidth = ctx.measureText("1.382("+String(y.getValueForPixel(drag.offsetY-y7).toFixed(2))+")").width;
+              a= (drag.offsetX - drag2.offsetX)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("1.382("+String(y.getValueForPixel(drag.offsetY-y7).toFixed(2))+")",drag.offsetX+a,drag.offsetY-y7,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(0,100,0,0.3)';    // color of fill
+              ctx.fillRect(drag.offsetX,drag.offsetY , -drag.offsetX + drag2.offsetX, y6);
+              textWidth = ctx.measureText("1("+String(y.getValueForPixel(drag.offsetY).toFixed(2))+")").width;
+              a= (drag.offsetX - drag2.offsetX)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("1("+String(y.getValueForPixel(drag.offsetY).toFixed(2))+")",drag.offsetX+a,drag.offsetY,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(169,169,169,0.3)';    // color of fill
+              ctx.fillRect(drag.offsetX,drag.offsetY+y6 , -drag.offsetX + drag2.offsetX, y5-y6);
+              textWidth = ctx.measureText("0.768("+String(y.getValueForPixel(drag.offsetY+y5).toFixed(2))+")").width;
+              a= (drag.offsetX - drag2.offsetX)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0.768("+String(y.getValueForPixel(drag.offsetY+y5).toFixed(2))+")",drag.offsetX+a,drag.offsetY+y5,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(135,206,250,0.3)';    // color of fill
+              ctx.fillRect(drag.offsetX,drag.offsetY+y5 , -drag.offsetX + drag2.offsetX, y4-y5);
+              textWidth = ctx.measureText("0.618("+String(y.getValueForPixel(drag.offsetY+y4).toFixed(2))+")").width;
+              a= (drag.offsetX - drag2.offsetX)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0.618("+String(y.getValueForPixel(drag.offsetY+y4).toFixed(2))+")",drag.offsetX+a,drag.offsetY+y4,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(102,205,170,0.3)';    // color of fill
+              ctx.fillRect(drag.offsetX,drag.offsetY+y4 , -drag.offsetX + drag2.offsetX, y3-y4);
+              textWidth = ctx.measureText("0.5("+String(y.getValueForPixel(drag.offsetY+y3).toFixed(2))+")").width;
+              a= (drag.offsetX - drag2.offsetX)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0.5("+String(y.getValueForPixel(drag.offsetY+y3).toFixed(2))+")",drag.offsetX+a,drag.offsetY+y3,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(0,250,154,0.3)';    // color of fill
+              ctx.fillRect(drag.offsetX,drag.offsetY+y3 , -drag.offsetX + drag2.offsetX, y2-y3);
+              textWidth = ctx.measureText("0.382("+String(y.getValueForPixel(drag.offsetY+y2).toFixed(2))+")").width;
+              a= (drag.offsetX - drag2.offsetX)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0.382("+String(y.getValueForPixel(drag.offsetY+y2).toFixed(2))+")",drag.offsetX+a, drag.offsetY+y2,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(255,228,181,0.3)';    // color of fill
+              ctx.fillRect(drag.offsetX,drag.offsetY+y2 , -drag.offsetX + drag2.offsetX, y1-y2);
+              textWidth = ctx.measureText("0.236("+String(y.getValueForPixel(drag.offsetY+y1).toFixed(2))+")").width;
+              a= (drag.offsetX - drag2.offsetX)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0.236("+String(y.getValueForPixel(drag.offsetY+y1).toFixed(2))+")",drag.offsetX+a,drag.offsetY+y1,textWidth);
+
+              ctx.beginPath();
+              ctx.fillStyle='rgba(250,128,114,0.3)';    // color of fill
+              ctx.fillRect(drag.offsetX,drag.offsetY+y1 , -drag.offsetX + drag2.offsetX, diff-y1);
+              textWidth = ctx.measureText("0("+String((y.getValueForPixel(drag2.offsetY)).toFixed(2))+")").width;
+              a= (drag.offsetX - drag2.offsetX)>=0? textWidth/2:-textWidth/2;
+              ctx.fillText("0("+String((y.getValueForPixel(drag2.offsetY)).toFixed(2))+")", drag.offsetX+a, drag.offsetY+diff, textWidth);
+
+              myChart.canvas.onmouseup = (e) => {
+                ctx.beginPath();
+               ctx.arc(drag2.offsetX, drag2.offsetY, 4, 0, 2 * Math.PI, true);
+                ctx.stroke();
+                ctx.closePath();
+                ctx.restore();
+                if(isAcceptFR===true) {
+                  if(stored_x===drag.offsetX&&stored_x2===drag2.offsetX&&stored_y===drag.offsetY&&stored_y2===drag2.offsetY){return;}
+                  else {
+                    storedRectangles.push({
+                      x1: x.getValueForPixel(drag.offsetX),
+                      y1: y.getValueForPixel(drag.offsetY),
+                      x2: x.getValueForPixel(drag2.offsetX),
+                      y2: y.getValueForPixel(drag2.offsetY)
+                    });
+                    stored_x = drag.offsetX;
+                    stored_x2 = drag2.offsetX;
+                    stored_y = drag.offsetY;
+                    stored_y2 = drag2.offsetY;
+                  }
+              }
+                //redrawStoredRectangles(chart);
+                isValidate = true;
+              }
+              window.onmouseup = (e) => { isValidate = true;}
+          }
+        }
+      }
+
+      }
+
+
+    function reset(){
+      const length = myChart.data.datasets[0].data.length -1 ;
+      myChart.config.options.scales.x.min = myChart.data.datasets[0].data[0].x;
+      myChart.config.options.scales.x.max = myChart.data.datasets[0].data[length].x;
+      myChart.config.options.scales.yLower.stackWeight = 0;
+      myChart.config.options.scales.yLower.ticks.display = false;
+      myChart.config.options.scales.yMACD.stackWeight = 0;
+      myChart.config.options.scales.yMACD.ticks.display = false;
+      myChart.config.options.scales.yVolume.stackWeight = 0;
+      myChart.config.options.scales.yVolume.ticks.display = false;
+      document.getElementById('ma').checked = false;
+      document.getElementById('bb').checked = false;
+      document.getElementById('rsi').checked = false;
+      document.getElementById('fr').checked = false;
+      document.getElementById('tl').checked = false;
+      document.getElementById('text').checked = false;
+      document.getElementById('br').checked = false;
+      document.getElementById('macd').checked = false;
+      storedLines = [];
+      storedRectangles = [];
+      storedBrush = [];
+      storedText = [];
+      myChart.update();
+    }
+    function trendline(){
+      if(document.getElementById('tl').checked === true){
+        isAcceptTL = true;
+        document.getElementById('fr').checked = false;
+        isAcceptFR = false;
+        document.getElementById('br').checked = false;
+        isAcceptBR = false;
+        document.getElementById('text').checked = false;
+        isAcceptText = false;
+      }
+      if(document.getElementById('tl').checked === false){
+        isAcceptTL = false;
+      }
+    }
+
+    function fibretracement(){
+        if(document.getElementById('fr').checked === true){
+        isAcceptFR = true;
+        document.getElementById('tl').checked = false;
+        isAcceptTL = false;
+        document.getElementById('br').checked = false;
+        isAcceptBR = false;
+        document.getElementById('text').checked = false;
+        isAcceptText = false;
+      }
+        if(document.getElementById('fr').checked === false){
+        isAcceptFR = false;
+      }
+    }
+    function brush(){
+      if(document.getElementById('br').checked === true){
+        isAcceptBR = true;
+        document.getElementById('tl').checked = false;
+        isAcceptTL = false;
+        document.getElementById('fr').checked = false;
+        isAcceptFR = false;
+        document.getElementById('text').checked = false;
+        isAcceptText = false;
+      }
+      if(document.getElementById('br').checked === false){
+        isAcceptBR = false;
+      }
+    }
+
+    function text(){
+      if(document.getElementById('text').checked === true){
+        isAcceptText = true;
+        document.getElementById('tl').checked = false;
+        isAcceptTL = false;
+        document.getElementById('fr').checked = false;
+        isAcceptFR = false;
+        document.getElementById('br').checked = false;
+        isAcceptBR = false;
+      }
+      if(document.getElementById('text').checked === false){
+        isAcceptText = false;
+      }
+    }
+    let sortOrder;
+    function update(indicator){
+
+      //-------------------------------------------------------------------------------------//
+      if(document.getElementById('volume').checked === true){
+        document.getElementById('volume-div').style.display='block';
+          if(document.getElementById('rsi').checked === true){
+              if(document.getElementById('macd').checked === true){
+                  //volume=true   rsi= true   macd=true
+                sortOrder = {'x': 1, 'yMACD': 2, 'yLower': 3,'yVolume':4,'y':5}
+                order(sortOrder);
+                myChart.config.options.scales.yVolume.stackWeight = 2;
+                myChart.config.options.scales.yVolume.ticks.display = true;
+                myChart.config.options.scales.yLower.stackWeight = 2;
+                myChart.config.options.scales.yLower.ticks.display = true;
+                myChart.config.options.scales.yMACD.stackWeight = 2;
+                myChart.config.options.scales.yMACD.ticks.display = true;
+
+
+                }
+              else{
+                  //volume=true   rsi= true   macd=false
+                sortOrder = {'x': 1, 'yMACD': 2, 'yLower': 3,'yVolume':4,'y':5}
+                order(sortOrder);
+                myChart.config.options.scales.yVolume.stackWeight = 2;
+                myChart.config.options.scales.yVolume.ticks.display = true;
+                myChart.config.options.scales.yLower.stackWeight = 2;
+                myChart.config.options.scales.yLower.ticks.display = true;
+                myChart.config.options.scales.yMACD.stackWeight = 0;
+                myChart.config.options.scales.yMACD.ticks.display = false;
+
+
+                }
+          }
+            //document.getElementById('rsi').checked === false
+          else{
+                if(document.getElementById('macd').checked === true){
+                    //volume=true   rsi= false   macd=true
+                    sortOrder = {'x': 1, 'yLower': 2, 'yMACD': 3,'yVolume':4,'y':5}
+                    order(sortOrder);
+                    myChart.config.options.scales.yVolume.stackWeight = 2;
+                    myChart.config.options.scales.yVolume.ticks.display = true;
+                    myChart.config.options.scales.yLower.stackWeight = 0;
+                    myChart.config.options.scales.yLower.ticks.display = false;
+                    myChart.config.options.scales.yMACD.stackWeight = 2;
+                    myChart.config.options.scales.yMACD.ticks.display = true;
+
+
+                }
+                else{
+                    //volume=true   rsi= false   macd=false
+                    sortOrder = {'x': 1, 'yMACD': 2, 'yLower': 3,'yVolume':4,'y':5}
+                    order(sortOrder);
+                    myChart.config.options.scales.yVolume.stackWeight = 2;
+                    myChart.config.options.scales.yVolume.ticks.display = true;
+                    myChart.config.options.scales.yLower.stackWeight = 0;
+                    myChart.config.options.scales.yLower.ticks.display = false;
+                    myChart.config.options.scales.yMACD.stackWeight = 0;
+                    myChart.config.options.scales.yMACD.ticks.display = false;
+                }
+          }
+
+
+      }
+      else{
+        document.getElementById('volume-div').style.display='none';
+          if(document.getElementById('rsi').checked === true){
+              if(document.getElementById('macd').checked === true){
+                  //volume=false   rsi= true   macd=true
+                sortOrder = {'x': 1, 'yVolume': 2, 'yMACD': 3,'yLower':4,'y':5}
+                order(sortOrder);
+                myChart.config.options.scales.yVolume.stackWeight = 0;
+                myChart.config.options.scales.yVolume.ticks.display = false;
+                myChart.config.options.scales.yLower.stackWeight = 2;
+                myChart.config.options.scales.yLower.ticks.display = true;
+                myChart.config.options.scales.yMACD.stackWeight = 2;
+                myChart.config.options.scales.yMACD.ticks.display = true;
+
+
+                }
+              else{
+                  //volume=false   rsi= true   macd=false
+                sortOrder = {'x': 1, 'yVolume': 2, 'yMACD': 3,'yLower':4,'y':5}
+                order(sortOrder);
+                myChart.config.options.scales.yVolume.stackWeight = 0;
+                myChart.config.options.scales.yVolume.ticks.display = false;
+                myChart.config.options.scales.yLower.stackWeight = 2;
+                myChart.config.options.scales.yLower.ticks.display = true;
+                myChart.config.options.scales.yMACD.stackWeight = 0;
+                myChart.config.options.scales.yMACD.ticks.display = false;
+                console.log(myChart.config.options.scales)
+                }
+          }
+          else{
+              if(document.getElementById('macd').checked === true){
+                  //volume=false   rsi= false   macd=true
+                sortOrder = {'x': 1, 'yVolume': 2, 'yLower': 3,'yMACD':4,'y':5}
+                order(sortOrder);
+                myChart.config.options.scales.yVolume.stackWeight = 0;
+                myChart.config.options.scales.yVolume.ticks.display = false;
+                myChart.config.options.scales.yLower.stackWeight = 0;
+                myChart.config.options.scales.yLower.ticks.display = false;
+                myChart.config.options.scales.yMACD.stackWeight = 2;
+                myChart.config.options.scales.yMACD.ticks.display = true;
+
+                }
+              else{
+                  //volume=false   rsi= false   macd=false
+                  //console.log(JSON.stringify(myChart.config.options.scales, null, 2))
+                sortOrder = {'x': 1, 'yMACD': 2, 'yLower': 3,'yVolume':4,'y':5}
+                order(sortOrder);
+                myChart.config.options.scales.yVolume.stackWeight = 0;
+                myChart.config.options.scales.yVolume.ticks.display = false;
+                myChart.config.options.scales.yLower.stackWeight = 0;
+                myChart.config.options.scales.yLower.ticks.display = false;
+                myChart.config.options.scales.yMACD.stackWeight = 0;
+                myChart.config.options.scales.yMACD.ticks.display = false;
+
+
+                }
+          }
+
+      }
+
+    }
+    function order(sortOrder){
+      myChart.config.options.scales =  Object.assign({}, ...Object.keys(myChart.config.options.scales).sort((a, b) => sortOrder[a] - sortOrder[b]).map(x => { return { [x]: myChart.config.options.scales[x]}}))
+      //console.log(JSON.stringify(myChart.config, null, 2))
+      let config2 = myChart.config;
+
+      myChart.destroy();
+      myChart = new Chart(
+      document.getElementById('myChart'),
+      config2
+    );
+
+    }
+    function changeMV(title){
+      n_days_MV = title.value;
+      document.getElementById('ma').checked = false;
+    }
+    function changeBB(title){
+      n_days_BB = title.value;
+      document.getElementById('bb').checked = false;
+    }
+    function changeStockName(title){
+      url = title.value;
+      stockData(url);
+      storedLines = [];
+      storedRectangles = [];
+      storedBrush = [];
+      document.getElementById('predict').checked = false;
+      myChart.update();
+    }
+
+    let amount_of_added_data=0;
+    let predict_info;
+    let index=0;
+    let pred_open= [];
+    let pred_high=[];
+    let pred_low=[];
+    let pred_close=[];
+    let pred_volume=[];
+    function showpred(){
+      pred_open= [];
+      pred_high=[];
+      pred_low=[];
+      pred_close=[];
+      pred_volume=[];
+      if(document.getElementById('predict').checked === true){
+         number_of_days= document.getElementById("days").value;
+         console.log(number_of_days)
+        const dict_values = {number_of_days,url}
+        const s = JSON.stringify(dict_values);
+        console.log(s)
+        $.ajax({
+            url:"/test",
+            type:"POST",
+            contentType: "application/json",
+            data: JSON.stringify(s),
+            success: function (data) {
+                index+=1
+                let a=[]
+                let result = JSON.parse(data);
+                for(let j=0;j< result.pred_high.length;j++){
+                  pred_open.push(result.pred_open[j]);
+                  pred_high.push(result.pred_high[j]);
+                  pred_low.push(result.pred_low[j]);
+                  pred_close.push(result.pred_close[j]);
+                  pred_volume.push(result.pred_volume[j]);
+            // console.log(pred_open[0])
+                  let current_date = new Date(date);
+                let date2=current_date;
+                for(let i=0;i<pred_open.length;i++){
+                  date2.setDate(date2.getDate() + 1);
+                  myChart.config.data.datasets[0].data.push({
+                    x: date2.setHours(0, 0, 0, 0),
+                    o: pred_open[i],
+                    h: pred_high[i],
+                    l: pred_low[i],
+                    c: pred_close[i],
+                    s: [pred_open[i], pred_close[i]]
+                  })
+          myChart.config.data.datasets[5].data.push({
+                x: date2.setHours(0, 0, 0, 0),
+                v: [pred_open[i], pred_close[i]],
+                s: [0, pred_volume[i]]
+              });
+
+      }
+        amount_of_added_data=pred_open.length;
+          }
+          console.log(myChart.config.data.datasets[0].data)
+        myChart.update();
+            }
+        });
+        // myChart.config.data.datasets[0].data.splice(1, 2);
+
+      }
+      else{
+        for(let i=0;i<(amount_of_added_data+1)*amount_of_added_data/2;i++){
+          myChart.config.data.datasets[0].data.pop();
+          myChart.config.data.datasets[5].data.pop();
+        }
+
+        myChart.update();
+      }
+
+    }
+
+    // --------------------------------------------------------------------------------------------------------------
+        let name = "FPT"
+        stockData(url);
+        function stockData(url){
+            minY=99999;
+            maxY=-10000;
+            minDate = "";
+            maxDate = "";
+            const update_data = [], RSI_data = [], MACD_data = [], signal_data = [], histogram_data = [],volume=[];
+            let loss = 0, gain = 0, previous_close = 0, avg_loss =0, avg_gain =0, total_gain = 0, total_loss = 0, RS = 0, RSI = 0;
+            let EMA12 = 0, EMA26 = 0, MACD = 0, signal = 0, histogram = 0, totalEMA = 0;
+            let i=-1;
+            let data;
+            let predicted_data;
+            const url_path = {url}
+            const s = JSON.stringify(url_path);
+            $.ajax({
+            type: "POST",
+            url: "/change_stock",
+            contentType: "application/json",
+            data: JSON.stringify(s),
+            success: function (my_value) {
+                const data = my_value;
+                console.log(data)
+                console.log(data.length)
+                console.log(data["name"])
+                for(let j=0;j<data.name.length;j++){
+              let column = []
+              column.push(data.name[j])
+              column.push(data.date[j])
+              column.push(data.open[j])
+              column.push(data.high[j])
+              column.push(data.low[j])
+              column.push(data.close[j])
+              column.push(data.volume[j])
+              i+=1;
+              date = column[1].substring(0,4)+'-'+column[1].substring(4,6)+'-'+column[1].substring(6);
+              if(i===data.name.length-10){ minDate = date; }
+              if(i===data.name.length-1){ maxDate = date; }
+              if(i>= data.name.length-10){
+                if(column[4] <= minY){ minY = column[4]; }
+                if(column[3] >= maxY){ maxY = column[3]; }
+              }
+              update_data.push({
+                x: new Date(date).setHours(0, 0, 0, 0),
+                o: column[2],
+                h: column[3],
+                l: column[4],
+                c: column[5],
+                s: [column[2], column[5]],
+                v: column[6]
+              });
+
+              volume.push({
+                x: new Date(date).setHours(0, 0, 0, 0),
+                v: [column[2], column[5]],
+                s: [0, column[6]]
+              });
+              if(parseFloat(column[5]) - previous_close >= 0 ){
+                if(i===0){
+                  gain = 0;
+                  loss = 0;}
+                else {
+                  gain = parseFloat(column[5]) - previous_close;
+                  loss = 0;
+                }
+              }
+              else{
+                gain = 0;
+                loss = previous_close - parseFloat(column[5]);
+              }
+              previous_close = parseFloat(column[5]);
+
+              if(i>=14){
+                avg_loss=(avg_loss*13+loss)/14;
+                avg_gain=(avg_gain*13+gain)/14;
+                RS = avg_gain/avg_loss;
+                RSI = (100-(100/(1+RS)));
+              }
+              else if(i===13){
+                avg_loss = total_loss/14;
+                avg_gain = total_gain/14;
+                RS = avg_gain/avg_loss;
+                RSI = (100-(100/(1+RS)));
+              }
+              else{
+                avg_loss = 0;
+                avg_gain = 0;
+                RSI = NaN;
+                total_gain += gain;
+                total_loss += loss;
+              }
+              RSI_data.push({
+                x: new Date(date).setHours(0, 0, 0, 0),
+                s: RSI
+            });
+            //MACD data
+              if(i>2) {
+                EMA12 = parseFloat(column[5]) * 2 / (1 + 12) + EMA12 * (1 - 2 / (1 + 12));
+                EMA26 = parseFloat(column[5]) * 2 / (1 + 26) + EMA26 * (1 - 2 / (1 + 26));
+                MACD = EMA12 - EMA26;
+                signal = MACD * 2 / (1 + 9) + signal * (1 - 2 / (1 + 9));
+                histogram = MACD - signal;
+
+              }
+              else if(i===2){
+                totalEMA += parseFloat(column[5]);
+                EMA12 = totalEMA/3;
+                EMA26 = totalEMA/3;
+                MACD = EMA12 - EMA26;
+                signal = MACD * 2 / (1 + 9) + signal * (1 - 2 / (1 + 9));
+                histogram = MACD - signal;
+              }
+              else{
+                totalEMA += parseFloat(column[5]);
+                MACD = 0;
+                signal = 0;
+                histogram = 0;
+
+              }
+              MACD_data.push({
+                  x: new Date(date).setHours(0, 0, 0, 0),
+                  s: MACD
+                });
+                signal_data.push({
+                  x: new Date(date).setHours(0, 0, 0, 0),
+                  s: signal
+                });
+                histogram_data.push({
+                  x: new Date(date).setHours(0, 0, 0, 0),
+                  s: [0, histogram]
+                })
+            }
+            console.log(myChart.config)
+            myChart.config.data.datasets[0].data = update_data;
+            myChart.config.data.datasets[1].data = RSI_data;
+            myChart.config.data.datasets[2].data = histogram_data;
+            myChart.config.data.datasets[3].data = MACD_data;
+            myChart.config.data.datasets[4].data = signal_data;
+            myChart.config.data.datasets[5].data = volume;
+            myChart.config.options.scales.y.min = minY;
+            myChart.config.options.scales.y.max = maxY;
+            myChart.config.options.scales.x.min = minDate;
+            myChart.config.options.scales.x.max = maxDate;
+            myChart.update();
+            }
+        });
+
+        }
+    </script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+<
